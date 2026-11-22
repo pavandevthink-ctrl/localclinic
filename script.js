@@ -211,18 +211,26 @@ function initMobileDrawer() {
   const openDrawer = () => {
     drawer.classList.add('open');
     overlay.classList.add('visible');
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
     document.body.style.overflow = 'hidden';
   };
 
   const closeDrawer = () => {
     drawer.classList.remove('open');
     overlay.classList.remove('visible');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   };
 
   hamburgerBtn.addEventListener('click', openDrawer);
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
   overlay.addEventListener('click', closeDrawer);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && drawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
 
   mobileLinks.forEach(link => {
     link.addEventListener('click', closeDrawer);
@@ -291,7 +299,19 @@ function initSmileSlider() {
 
   if (!container || !afterWrapper || !handle) return;
 
+  const afterImg = afterWrapper.querySelector('.slider-img');
   let isDragging = false;
+
+  // Synchronize internal after-image width to match container width on any viewport
+  const syncImageWidth = () => {
+    if (afterImg && container) {
+      afterImg.style.width = `${container.offsetWidth}px`;
+    }
+  };
+
+  syncImageWidth();
+  window.addEventListener('resize', syncImageWidth, { passive: true });
+  window.addEventListener('orientationchange', syncImageWidth, { passive: true });
 
   const updateSlider = (clientX) => {
     const rect = container.getBoundingClientRect();
@@ -317,17 +337,24 @@ function initSmileSlider() {
     updateSlider(e.clientX);
   });
 
-  // Touch Events for Mobile
-  handle.addEventListener('touchstart', () => isDragging = true, { passive: true });
+  // Touch Events for Mobile & Tablets
+  handle.addEventListener('touchstart', (e) => {
+    isDragging = true;
+  }, { passive: true });
+
   container.addEventListener('touchstart', (e) => {
     isDragging = true;
-    if (e.touches[0]) updateSlider(e.touches[0].clientX);
+    if (e.touches && e.touches[0]) updateSlider(e.touches[0].clientX);
   }, { passive: true });
 
   window.addEventListener('touchend', () => isDragging = false);
+  window.addEventListener('touchcancel', () => isDragging = false);
+
   window.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
-    if (e.touches[0]) updateSlider(e.touches[0].clientX);
+    if (e.touches && e.touches[0]) {
+      updateSlider(e.touches[0].clientX);
+    }
   }, { passive: true });
 }
 
