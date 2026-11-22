@@ -28,7 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Main Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 
   <!-- LocalBusiness / Dentist Schema Structured Data -->
   <script type="application/ld+json">
@@ -1972,9 +1972,9 @@
           </div>
 
           <!-- Working Hours Table -->
-          <div>
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-              <h4 style="font-size:1rem; font-weight:800; color:var(--primary);">Clinic Working Hours</h4>
+          <div class="contact-timings-box">
+            <div class="timings-header-row">
+              <h4 class="timings-title">Clinic Working Hours</h4>
               <span class="open-status">Open Today until 8:30 PM</span>
             </div>
             <table class="timings-table">
@@ -1984,24 +1984,30 @@
                   <td>9:00 AM - 8:30 PM</td>
                 </tr>
                 <tr>
-                  <td>Sunday (Appointments & Urgent)</td>
+                  <td>Sunday (Urgent Care)</td>
                   <td>10:00 AM - 2:00 PM</td>
                 </tr>
                 <tr>
-                  <td>24/7 Dental Emergency</td>
-                  <td>Available On-Call</td>
+                  <td>Emergency Helpline</td>
+                  <td>24/7 On-Call</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <div style="display:flex; gap:12px; margin-top:8px;">
-            <a href="https://wa.me/919876543210?text=Hi%20Dentia%20Clinic,%20I%20would%20like%20to%20inquire%20about%20dental%20treatments" target="_blank" rel="noopener" class="btn btn-secondary" style="flex:1;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
-              Chat on WhatsApp
+          <!-- Contact CTAs: Call Now, WhatsApp, Book Appointment -->
+          <div class="contact-cta-stack">
+            <a href="tel:+919876543210" class="btn btn-outline contact-cta-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Call Now</span>
             </a>
-            <button class="btn btn-primary open-booking-modal" style="flex:1;">
-              Book Appointment
+            <a href="https://wa.me/919876543210?text=Hi%20Dentia%20Clinic,%20I%20would%20like%20to%20inquire%20about%20dental%20treatments" target="_blank" rel="noopener" class="btn btn-secondary contact-cta-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+            <button class="btn btn-primary contact-cta-btn open-booking-modal">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Book Appointment</span>
             </button>
           </div>
         </div>
@@ -2082,23 +2088,26 @@
           </ul>
         </div>
 
-        <!-- Footer Column 4: Emergency & Address -->
-        <div>
-          <h4 class="footer-heading">Clinic Contact</h4>
-          <p style="margin-bottom:12px; color:rgba(255,255,255,0.75);">
+        <!-- Footer Column 4: Clinic Contact & CTAs -->
+        <div class="footer-cta-col">
+          <h4 class="footer-heading">Clinic Contact & Quick CTAs</h4>
+          <p style="margin-bottom:12px; color:rgba(255,255,255,0.78); line-height:1.5;">
             204-206, Harmony Health Plaza, Opposite Star Bazaar, Adajan Main Road, Surat - 395009
           </p>
-          <div style="margin-bottom:14px;">
-            <div style="font-size:0.8rem; color:var(--secondary); text-transform:uppercase; font-weight:700;">Appointments & Inquiries</div>
-            <a href="tel:+919876543210" style="font-size:1.15rem; font-weight:800; color:var(--white);">+91 98765 43210</a>
+          <div class="footer-cta-stack">
+            <a href="tel:+919876543210" class="btn footer-cta-btn footer-btn-call">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span>Call: +91 98765 43210</span>
+            </a>
+            <a href="https://wa.me/919876543210?text=Hi%20Dentia%20Clinic,%20I%20would%20like%20to%20book%20an%20appointment" target="_blank" rel="noopener" class="btn footer-cta-btn footer-btn-whatsapp">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.63C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 14.99 3.81 13.47 3.81 11.91C3.81 7.37 7.5 3.67 12.05 3.67Z"/></svg>
+              <span>Chat on WhatsApp</span>
+            </a>
+            <button class="btn footer-cta-btn footer-btn-book open-booking-modal">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Book Appointment</span>
+            </button>
           </div>
-          <div style="margin-bottom:18px;">
-            <div style="font-size:0.8rem; color:var(--secondary); text-transform:uppercase; font-weight:700;">Email Consultation</div>
-            <a href="mailto:care@dentiaclinic.com" style="color:rgba(255,255,255,0.85);">care@dentiaclinic.com</a>
-          </div>
-          <button class="btn btn-secondary btn-sm open-booking-modal" style="width:100%;">
-            Book Appointment
-          </button>
         </div>
       </div>
 
@@ -2268,6 +2277,6 @@
   </aside>
 
   <!-- Interactive JavaScript -->
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>
