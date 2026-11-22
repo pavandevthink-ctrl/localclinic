@@ -7,7 +7,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
   initLogoHomeAction();
+  initTreatmentsDropdown();
   initMobileDrawer();
+  initMobileTreatmentsAccordion();
   initQuickBookingBar();
   initServiceFilters();
   initSmileSlider();
@@ -16,6 +18,145 @@ document.addEventListener('DOMContentLoaded', () => {
   initBookingModal();
   initDateConstraints();
 });
+
+/* ==========================================================================
+   Treatments Mega Dropdown (Keyboard & Touch Accessibility)
+   ========================================================================== */
+function initTreatmentsDropdown() {
+  const container = document.getElementById('treatments-dropdown-container');
+  const toggleBtn = document.getElementById('treatments-menu-button');
+  const panel = document.getElementById('treatments-dropdown-panel');
+  if (!container || !toggleBtn || !panel) return;
+
+  const items = Array.from(panel.querySelectorAll('.treatment-item-link, .dropdown-footer-link'));
+  let activeIndex = -1;
+
+  const openDropdown = (focusFirst = false) => {
+    container.classList.add('is-open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    if (focusFirst && items.length > 0) {
+      activeIndex = 0;
+      items[0].focus();
+    }
+  };
+
+  const closeDropdown = (returnFocus = false) => {
+    container.classList.remove('is-open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    activeIndex = -1;
+    if (returnFocus) {
+      toggleBtn.focus();
+    }
+  };
+
+  const toggleDropdown = () => {
+    const isOpen = container.classList.contains('is-open');
+    if (isOpen) {
+      closeDropdown(false);
+    } else {
+      openDropdown(false);
+    }
+  };
+
+  // Toggle on click / tap
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleDropdown();
+  });
+
+  // Desktop hover
+  container.addEventListener('mouseenter', () => {
+    openDropdown(false);
+  });
+
+  container.addEventListener('mouseleave', () => {
+    closeDropdown(false);
+  });
+
+  // Keyboard navigation on button
+  toggleBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      openDropdown(true);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDropdown(true);
+    }
+  });
+
+  // Keyboard navigation across items
+  items.forEach((item, index) => {
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        activeIndex = (index + 1) % items.length;
+        items[activeIndex].focus();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        activeIndex = (index - 1 + items.length) % items.length;
+        items[activeIndex].focus();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        activeIndex = 0;
+        items[0].focus();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        activeIndex = items.length - 1;
+        items[activeIndex].focus();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeDropdown(true);
+      }
+    });
+
+    // Close on click item
+    item.addEventListener('click', () => {
+      closeDropdown(false);
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      closeDropdown(false);
+    }
+  });
+}
+
+/* ==========================================================================
+   Mobile Treatments Accordion
+   ========================================================================== */
+function initMobileTreatmentsAccordion() {
+  const accordion = document.getElementById('mobile-treatments-accordion');
+  const toggleBtn = document.getElementById('mobile-treatments-btn');
+  const drawer = document.querySelector('.mobile-drawer');
+  const overlay = document.querySelector('.mobile-overlay');
+  if (!accordion || !toggleBtn) return;
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isExpanded = accordion.classList.contains('is-expanded');
+    if (isExpanded) {
+      accordion.classList.remove('is-expanded');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      accordion.classList.add('is-expanded');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Close drawer when an accordion item is clicked
+  const accordionLinks = accordion.querySelectorAll('.mobile-treatment-item');
+  accordionLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (drawer && overlay) {
+        drawer.classList.remove('open');
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+}
 
 /* ==========================================================================
    Logo Click Handler (Serves as Home button)

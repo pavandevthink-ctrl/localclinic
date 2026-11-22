@@ -278,6 +278,10 @@ button, input, select, textarea {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .top-bar-left, .top-bar-right {
@@ -341,7 +345,7 @@ button, input, select, textarea {
 
 .site-header.scrolled {
   box-shadow: 0 6px 20px rgba(23, 74, 91, 0.08);
-  padding: 4px 0;
+  padding: 0;
 }
 
 .nav-container {
@@ -349,18 +353,34 @@ button, input, select, textarea {
   align-items: center;
   justify-content: space-between;
   height: 80px;
-  transition: height var(--transition-normal);
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 .site-header.scrolled .nav-container {
-  height: 70px;
+  height: 76px;
 }
 
-/* Brand Logo */
+/* Brand Logo - Fixed Height, Vertically Centered, No Wrap */
 .brand-logo {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  height: 50px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.brand-logo:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
 }
 
 .brand-icon-box {
@@ -372,6 +392,7 @@ button, input, select, textarea {
   align-items: center;
   justify-content: center;
   color: var(--white);
+  flex-shrink: 0;
   box-shadow: 0 4px 12px rgba(23, 74, 91, 0.2);
 }
 
@@ -383,14 +404,17 @@ button, input, select, textarea {
 .brand-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .brand-name {
   font-size: 1.55rem;
   font-weight: 800;
   color: var(--primary);
-  line-height: 1;
+  line-height: 1.1;
   letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .brand-name span {
@@ -398,44 +422,61 @@ button, input, select, textarea {
 }
 
 .brand-tagline {
-  font-size: 0.72rem;
-  font-weight: 600;
+  font-size: 10.5px;
+  font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.08em;
   margin-top: 2px;
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
-/* Navigation Links */
+/* Navigation Links - Single Row, No Wrapping */
 .nav-menu {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .nav-item {
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-link {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--charcoal);
-  padding: 8px 4px;
-  display: flex;
+  padding: 10px 4px;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   position: relative;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background: none;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: color var(--transition-fast);
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover, .nav-link:focus, .nav-link.active {
   color: var(--primary);
+  outline: none;
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 0;
+  bottom: 2px;
   left: 0;
   width: 0;
   height: 2px;
@@ -444,29 +485,34 @@ button, input, select, textarea {
   border-radius: 2px;
 }
 
-.nav-link:hover::after, .nav-link.active::after {
+.nav-link:hover::after, .nav-link:focus::after, .nav-link.active::after {
   width: 100%;
 }
 
-/* Dropdown Menu */
+/* Dropdown Chevron */
 .dropdown-chevron {
   width: 14px;
   height: 14px;
   transition: transform var(--transition-fast);
+  color: currentColor;
 }
 
-.nav-item:hover .dropdown-chevron {
+.nav-item:hover .dropdown-chevron,
+.nav-item.open .dropdown-chevron,
+.nav-item.is-open .dropdown-chevron,
+.dropdown-toggle-btn[aria-expanded="true"] .dropdown-chevron {
   transform: rotate(180deg);
 }
 
+/* Standard Dropdown Menu */
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: -20px;
   width: 290px;
   background-color: var(--white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px -6px rgba(23, 74, 91, 0.16);
   border: 1px solid var(--border-color);
   padding: 12px;
   display: none;
@@ -481,10 +527,92 @@ button, input, select, textarea {
   right: 0;
 }
 
-.nav-item:hover .dropdown-menu {
+.nav-item:hover .dropdown-menu,
+.nav-item:focus-within .dropdown-menu,
+.nav-item.open .dropdown-menu,
+.nav-item.is-open .dropdown-menu {
   display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 2-Column Treatments Mega Dropdown */
+.dropdown-treatments-grid {
+  width: 580px;
+  max-width: 92vw;
+  padding: 16px;
+  left: -40px;
+}
+
+.treatments-grid-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 12px;
+}
+
+.treatment-item-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: var(--charcoal);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.treatment-item-link:hover, .treatment-item-link:focus {
+  background-color: var(--soft-aqua);
+  color: var(--primary);
+  transform: translateX(3px);
+  outline: none;
+}
+
+.treatment-item-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.treatment-item-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.25;
+}
+
+.treatment-item-desc {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  margin-top: 2px;
+}
+
+.dropdown-footer {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+
+.dropdown-footer-link {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent-teal);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.dropdown-footer-link:hover {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.dropdown-footer-link svg {
+  width: 14px;
+  height: 14px;
 }
 
 .dropdown-link {
@@ -496,54 +624,84 @@ button, input, select, textarea {
   color: var(--charcoal);
   font-size: 0.9rem;
   font-weight: 600;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
-.dropdown-link:hover {
+.dropdown-link:hover, .dropdown-link:focus {
   background-color: var(--soft-aqua);
   color: var(--primary);
   transform: translateX(4px);
+  outline: none;
 }
 
 .dropdown-icon {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   background-color: var(--soft-aqua);
-  border-radius: 6px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--primary);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .dropdown-icon svg {
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
 }
 
+/* Nav Action Wrapper - No Shrink, No Wrap */
 .nav-action-wrapper {
   display: flex;
   align-items: center;
   gap: 16px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
 }
 
 .nav-phone-btn {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 14px;
+  padding: 10px 18px;
   background-color: var(--soft-aqua);
   border-radius: var(--radius-full);
   color: var(--primary);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-decoration: none;
   transition: all var(--transition-fast);
 }
 
 .nav-phone-btn:hover {
   background-color: #d6ebea;
   color: var(--primary-dark);
+}
+
+.nav-phone-number {
+  white-space: nowrap;
+}
+
+.nav-phone-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-phone-icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 .nav-phone-icon {
@@ -654,6 +812,92 @@ button, input, select, textarea {
 
 .mobile-nav-link:hover {
   color: var(--primary);
+}
+
+/* Mobile Treatments Accordion */
+.mobile-accordion {
+  border: 1px solid var(--border-light);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 4px 0;
+  background-color: var(--soft-aqua-light);
+}
+
+.mobile-accordion-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+
+.mobile-accordion-chevron {
+  width: 16px;
+  height: 16px;
+  color: var(--primary);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.mobile-accordion.is-expanded .mobile-accordion-chevron,
+.mobile-accordion-toggle[aria-expanded="true"] .mobile-accordion-chevron {
+  transform: rotate(180deg);
+}
+
+.mobile-accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  background-color: var(--white);
+}
+
+.mobile-accordion.is-expanded .mobile-accordion-panel {
+  max-height: 900px;
+}
+
+.mobile-treatments-list {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  gap: 4px;
+}
+
+.mobile-treatment-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color var(--transition-fast);
+}
+
+.mobile-treatment-item:hover, .mobile-treatment-item:focus {
+  background-color: var(--soft-aqua);
+}
+
+.m-treatment-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.m-treatment-desc {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.mobile-treatment-item.emergency-item {
+  background-color: rgba(239, 68, 68, 0.05);
+  border: 1px dashed rgba(239, 68, 68, 0.3);
 }
 
 /* ==========================================================================
@@ -2494,15 +2738,54 @@ textarea.form-control {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Responsive Breakpoints & Navbar Strict Rules
    ========================================================================== */
 
-@media (max-width: 1080px) {
-  .hero-headline {
-    font-size: 2.8rem;
+/* 1024px to 1279px: Hide phone pill & tighten gap so nav NEVER wraps */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav-phone-btn {
+    display: none !important;
+  }
+  .nav-menu {
+    gap: 18px !important;
+  }
+  .nav-link {
+    font-size: 0.88rem !important;
+  }
+  .brand-name {
+    font-size: 1.35rem !important;
+  }
+  .brand-tagline {
+    font-size: 9.5px !important;
+  }
+}
+
+/* < 1024px: Switch to hamburger menu, keep Book Appointment visible */
+@media (max-width: 1023px) {
+  .nav-menu {
+    display: none !important;
+  }
+  .nav-phone-btn {
+    display: none !important;
+  }
+  .nav-action-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .nav-action-wrapper .btn-primary {
+    display: inline-flex !important;
+    padding: 9px 16px !important;
+    font-size: 0.88rem !important;
+  }
+  .hamburger-btn {
+    display: block !important;
   }
   .services-grid, .doctors-grid, .why-us-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .hero-headline {
+    font-size: 2.8rem;
   }
   .quick-booking-bar {
     grid-template-columns: repeat(2, 1fr);
@@ -2515,21 +2798,10 @@ textarea.form-control {
   }
 }
 
-@media (max-width: 768px) {
+/* < 768px: Mobile layouts */
+@media (max-width: 767px) {
   body {
     padding-bottom: 60px; /* Space for mobile sticky bottom bar */
-  }
-
-  .top-bar {
-    display: none;
-  }
-
-  .nav-menu, .nav-action-wrapper {
-    display: none;
-  }
-
-  .hamburger-btn {
-    display: block;
   }
 
   .hero-section {
@@ -2542,7 +2814,7 @@ textarea.form-control {
   }
 
   .hero-headline {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
 
   .floating-badge {
@@ -2593,6 +2865,49 @@ textarea.form-control {
 
   .mobile-bottom-bar {
     display: block;
+  }
+}
+
+/* < 640px: Top bar collapses into single Emergency Helpline */
+@media (max-width: 639px) {
+  .top-bar-left {
+    display: none !important;
+  }
+  .top-bar-container {
+    justify-content: center !important;
+    padding: 0 12px !important;
+  }
+  .hero-headline {
+    font-size: 1.85rem;
+  }
+  .trust-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* < 480px: Compact brand header to prevent any overflow on small mobile screens */
+@media (max-width: 479px) {
+  .brand-tagline {
+    display: none !important;
+  }
+  .nav-container {
+    padding: 0 12px !important;
+  }
+  .nav-action-wrapper .btn-primary {
+    padding: 8px 12px !important;
+    font-size: 0.80rem !important;
+    gap: 6px !important;
+  }
+  .nav-action-wrapper .btn-primary svg {
+    width: 15px !important;
+    height: 15px !important;
+  }
+  .brand-icon-box {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  .brand-name {
+    font-size: 1.35rem !important;
   }
 }
 
@@ -2771,45 +3086,142 @@ textarea.form-control {
           <a href="#about" class="nav-link">About Us</a>
         </div>
         
-        <!-- Treatments Dropdown Menu -->
-        <div class="nav-item">
-          <a href="#treatments" class="nav-link">
-            Treatments
-            <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </a>
-          <div class="dropdown-menu">
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Dental Implants'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M8 6h8M8 12h8M9 18h6"/></svg></div>
-              <div>Dental Implants</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Root Canal Treatment'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
-              <div>Root Canal Treatment</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Teeth Whitening'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-              <div>Teeth Whitening</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Clear Aligners'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-              <div>Clear Aligners (Invisalign)</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Dental Braces'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
-              <div>Dental Braces</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Teeth Cleaning & Scaling'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
-              <div>Teeth Cleaning & Polishing</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Pediatric Dentistry'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
-              <div>Pediatric Dentistry</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Cosmetic Dentistry'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
-              <div>Cosmetic Smile Makeover</div>
-            </a>
+        <!-- Treatments Mega Dropdown (2-Column Grid, 11 Items + View All) -->
+        <div class="nav-item nav-item-dropdown" id="treatments-dropdown-container">
+          <button class="nav-link dropdown-toggle-btn" aria-expanded="false" aria-haspopup="true" aria-controls="treatments-dropdown-panel" id="treatments-menu-button">
+            <span>Treatments</span>
+            <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown-menu dropdown-treatments-grid" id="treatments-dropdown-panel" role="region" aria-labelledby="treatments-menu-button">
+            <div class="treatments-grid-items" role="menu">
+              <!-- 1. General Checkup & Cleaning -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Teeth Cleaning & Scaling'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">General Checkup &amp; Cleaning</div>
+                  <div class="treatment-item-desc">Routine exams, scaling and polishing</div>
+                </div>
+              </a>
+
+              <!-- 2. Dental Implants -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Dental Implants'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M8 6h8M8 12h8M9 18h6"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Dental Implants</div>
+                  <div class="treatment-item-desc">Permanent tooth replacement</div>
+                </div>
+              </a>
+
+              <!-- 3. Root Canal Treatment (RCT) -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Root Canal Treatment'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Root Canal Treatment (RCT)</div>
+                  <div class="treatment-item-desc">Pain-free infection treatment</div>
+                </div>
+              </a>
+
+              <!-- 4. Teeth Whitening -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Teeth Whitening'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Teeth Whitening</div>
+                  <div class="treatment-item-desc">Brighter smile in one visit</div>
+                </div>
+              </a>
+
+              <!-- 5. Braces & Clear Aligners -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Clear Aligners'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Braces &amp; Clear Aligners</div>
+                  <div class="treatment-item-desc">Straighten teeth discreetly</div>
+                </div>
+              </a>
+
+              <!-- 6. Smile Makeover & Veneers -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Cosmetic Dentistry'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Smile Makeover &amp; Veneers</div>
+                  <div class="treatment-item-desc">Cosmetic smile design</div>
+                </div>
+              </a>
+
+              <!-- 7. Crowns, Bridges & Dentures -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Dental Crowns'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Crowns, Bridges &amp; Dentures</div>
+                  <div class="treatment-item-desc">Restore damaged or missing teeth</div>
+                </div>
+              </a>
+
+              <!-- 8. Pediatric Dentistry -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Pediatric Dentistry'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Pediatric Dentistry</div>
+                  <div class="treatment-item-desc">Gentle care for kids</div>
+                </div>
+              </a>
+
+              <!-- 9. Wisdom Tooth Extraction -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Wisdom Tooth Removal'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Wisdom Tooth Extraction</div>
+                  <div class="treatment-item-desc">Safe surgical removal</div>
+                </div>
+              </a>
+
+              <!-- 10. Gum Disease Therapy -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Gum Treatment'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Gum Disease Therapy</div>
+                  <div class="treatment-item-desc">Periodontal health and care</div>
+                </div>
+              </a>
+
+              <!-- 11. Emergency Dental Care -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Emergency Dental Care'})">
+                <div class="dropdown-icon" style="background-color:rgba(239,68,68,0.15); color:#ef4444;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Emergency Dental Care</div>
+                  <div class="treatment-item-desc">Same-day urgent relief</div>
+                </div>
+              </a>
+            </div>
+
+            <div class="dropdown-footer">
+              <a href="#treatments" class="dropdown-footer-link">
+                <span>View all treatments &amp; clinical procedures</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -2896,7 +3308,63 @@ textarea.form-control {
 
     <div class="mobile-nav-links">
       <a href="#about" class="mobile-nav-link">About Us</a>
-      <a href="#treatments" class="mobile-nav-link">Treatments & Services</a>
+      
+      <!-- Mobile Treatments Accordion -->
+      <div class="mobile-accordion" id="mobile-treatments-accordion">
+        <button class="mobile-accordion-toggle" id="mobile-treatments-btn" aria-expanded="false" aria-controls="mobile-treatments-panel">
+          <span>Treatments &amp; Specialties</span>
+          <svg class="mobile-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-accordion-panel" id="mobile-treatments-panel">
+          <div class="mobile-treatments-list">
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Teeth Cleaning & Scaling'})">
+              <span class="m-treatment-name">General Checkup &amp; Cleaning</span>
+              <span class="m-treatment-desc">Routine exams, scaling and polishing</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Dental Implants'})">
+              <span class="m-treatment-name">Dental Implants</span>
+              <span class="m-treatment-desc">Permanent tooth replacement</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Root Canal Treatment'})">
+              <span class="m-treatment-name">Root Canal Treatment (RCT)</span>
+              <span class="m-treatment-desc">Pain-free infection treatment</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Teeth Whitening'})">
+              <span class="m-treatment-name">Teeth Whitening</span>
+              <span class="m-treatment-desc">Brighter smile in one visit</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Clear Aligners'})">
+              <span class="m-treatment-name">Braces &amp; Clear Aligners</span>
+              <span class="m-treatment-desc">Straighten teeth discreetly</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Cosmetic Dentistry'})">
+              <span class="m-treatment-name">Smile Makeover &amp; Veneers</span>
+              <span class="m-treatment-desc">Cosmetic smile design</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Dental Crowns'})">
+              <span class="m-treatment-name">Crowns, Bridges &amp; Dentures</span>
+              <span class="m-treatment-desc">Restore damaged or missing teeth</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Pediatric Dentistry'})">
+              <span class="m-treatment-name">Pediatric Dentistry</span>
+              <span class="m-treatment-desc">Gentle care for kids</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Wisdom Tooth Removal'})">
+              <span class="m-treatment-name">Wisdom Tooth Extraction</span>
+              <span class="m-treatment-desc">Safe surgical removal</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Gum Treatment'})">
+              <span class="m-treatment-name">Gum Disease Therapy</span>
+              <span class="m-treatment-desc">Periodontal health and care</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item emergency-item" onclick="openAppointmentModal({treatment: 'Emergency Dental Care'})">
+              <span class="m-treatment-name" style="color:#ef4444;">Emergency Dental Care</span>
+              <span class="m-treatment-desc">Same-day urgent relief</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <a href="#dentists" class="mobile-nav-link">Meet Our Dentists</a>
       <a href="#why-us" class="mobile-nav-link">Why Choose Us</a>
       <a href="#transformation" class="mobile-nav-link">Smile Transformation</a>
@@ -4693,7 +5161,9 @@ textarea.form-control {
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
   initLogoHomeAction();
+  initTreatmentsDropdown();
   initMobileDrawer();
+  initMobileTreatmentsAccordion();
   initQuickBookingBar();
   initServiceFilters();
   initSmileSlider();
@@ -4702,6 +5172,145 @@ document.addEventListener('DOMContentLoaded', () => {
   initBookingModal();
   initDateConstraints();
 });
+
+/* ==========================================================================
+   Treatments Mega Dropdown (Keyboard & Touch Accessibility)
+   ========================================================================== */
+function initTreatmentsDropdown() {
+  const container = document.getElementById('treatments-dropdown-container');
+  const toggleBtn = document.getElementById('treatments-menu-button');
+  const panel = document.getElementById('treatments-dropdown-panel');
+  if (!container || !toggleBtn || !panel) return;
+
+  const items = Array.from(panel.querySelectorAll('.treatment-item-link, .dropdown-footer-link'));
+  let activeIndex = -1;
+
+  const openDropdown = (focusFirst = false) => {
+    container.classList.add('is-open');
+    toggleBtn.setAttribute('aria-expanded', 'true');
+    if (focusFirst && items.length > 0) {
+      activeIndex = 0;
+      items[0].focus();
+    }
+  };
+
+  const closeDropdown = (returnFocus = false) => {
+    container.classList.remove('is-open');
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    activeIndex = -1;
+    if (returnFocus) {
+      toggleBtn.focus();
+    }
+  };
+
+  const toggleDropdown = () => {
+    const isOpen = container.classList.contains('is-open');
+    if (isOpen) {
+      closeDropdown(false);
+    } else {
+      openDropdown(false);
+    }
+  };
+
+  // Toggle on click / tap
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    toggleDropdown();
+  });
+
+  // Desktop hover
+  container.addEventListener('mouseenter', () => {
+    openDropdown(false);
+  });
+
+  container.addEventListener('mouseleave', () => {
+    closeDropdown(false);
+  });
+
+  // Keyboard navigation on button
+  toggleBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      openDropdown(true);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      closeDropdown(true);
+    }
+  });
+
+  // Keyboard navigation across items
+  items.forEach((item, index) => {
+    item.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        activeIndex = (index + 1) % items.length;
+        items[activeIndex].focus();
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        activeIndex = (index - 1 + items.length) % items.length;
+        items[activeIndex].focus();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        activeIndex = 0;
+        items[0].focus();
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        activeIndex = items.length - 1;
+        items[activeIndex].focus();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeDropdown(true);
+      }
+    });
+
+    // Close on click item
+    item.addEventListener('click', () => {
+      closeDropdown(false);
+    });
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      closeDropdown(false);
+    }
+  });
+}
+
+/* ==========================================================================
+   Mobile Treatments Accordion
+   ========================================================================== */
+function initMobileTreatmentsAccordion() {
+  const accordion = document.getElementById('mobile-treatments-accordion');
+  const toggleBtn = document.getElementById('mobile-treatments-btn');
+  const drawer = document.querySelector('.mobile-drawer');
+  const overlay = document.querySelector('.mobile-overlay');
+  if (!accordion || !toggleBtn) return;
+
+  toggleBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const isExpanded = accordion.classList.contains('is-expanded');
+    if (isExpanded) {
+      accordion.classList.remove('is-expanded');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      accordion.classList.add('is-expanded');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Close drawer when an accordion item is clicked
+  const accordionLinks = accordion.querySelectorAll('.mobile-treatment-item');
+  accordionLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (drawer && overlay) {
+        drawer.classList.remove('open');
+        overlay.classList.remove('visible');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+}
 
 /* ==========================================================================
    Logo Click Handler (Serves as Home button)
@@ -5093,3 +5702,4 @@ function initDateConstraints() {
 </script>
 </body>
 </html>
+

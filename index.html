@@ -200,45 +200,142 @@
           <a href="#about" class="nav-link">About Us</a>
         </div>
         
-        <!-- Treatments Dropdown Menu -->
-        <div class="nav-item">
-          <a href="#treatments" class="nav-link">
-            Treatments
-            <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-          </a>
-          <div class="dropdown-menu">
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Dental Implants'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M8 6h8M8 12h8M9 18h6"/></svg></div>
-              <div>Dental Implants</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Root Canal Treatment'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
-              <div>Root Canal Treatment</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Teeth Whitening'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-              <div>Teeth Whitening</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Clear Aligners'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
-              <div>Clear Aligners (Invisalign)</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Dental Braces'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div>
-              <div>Dental Braces</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Teeth Cleaning & Scaling'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
-              <div>Teeth Cleaning & Polishing</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Pediatric Dentistry'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
-              <div>Pediatric Dentistry</div>
-            </a>
-            <a href="#treatments" class="dropdown-link" onclick="openAppointmentModal({treatment: 'Cosmetic Dentistry'})">
-              <div class="dropdown-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
-              <div>Cosmetic Smile Makeover</div>
-            </a>
+        <!-- Treatments Mega Dropdown (2-Column Grid, 11 Items + View All) -->
+        <div class="nav-item nav-item-dropdown" id="treatments-dropdown-container">
+          <button class="nav-link dropdown-toggle-btn" aria-expanded="false" aria-haspopup="true" aria-controls="treatments-dropdown-panel" id="treatments-menu-button">
+            <span>Treatments</span>
+            <svg class="dropdown-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="dropdown-menu dropdown-treatments-grid" id="treatments-dropdown-panel" role="region" aria-labelledby="treatments-menu-button">
+            <div class="treatments-grid-items" role="menu">
+              <!-- 1. General Checkup & Cleaning -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Teeth Cleaning & Scaling'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">General Checkup &amp; Cleaning</div>
+                  <div class="treatment-item-desc">Routine exams, scaling and polishing</div>
+                </div>
+              </a>
+
+              <!-- 2. Dental Implants -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Dental Implants'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M8 6h8M8 12h8M9 18h6"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Dental Implants</div>
+                  <div class="treatment-item-desc">Permanent tooth replacement</div>
+                </div>
+              </a>
+
+              <!-- 3. Root Canal Treatment (RCT) -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Root Canal Treatment'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Root Canal Treatment (RCT)</div>
+                  <div class="treatment-item-desc">Pain-free infection treatment</div>
+                </div>
+              </a>
+
+              <!-- 4. Teeth Whitening -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Teeth Whitening'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Teeth Whitening</div>
+                  <div class="treatment-item-desc">Brighter smile in one visit</div>
+                </div>
+              </a>
+
+              <!-- 5. Braces & Clear Aligners -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Clear Aligners'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Braces &amp; Clear Aligners</div>
+                  <div class="treatment-item-desc">Straighten teeth discreetly</div>
+                </div>
+              </a>
+
+              <!-- 6. Smile Makeover & Veneers -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Cosmetic Dentistry'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Smile Makeover &amp; Veneers</div>
+                  <div class="treatment-item-desc">Cosmetic smile design</div>
+                </div>
+              </a>
+
+              <!-- 7. Crowns, Bridges & Dentures -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Dental Crowns'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Crowns, Bridges &amp; Dentures</div>
+                  <div class="treatment-item-desc">Restore damaged or missing teeth</div>
+                </div>
+              </a>
+
+              <!-- 8. Pediatric Dentistry -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Pediatric Dentistry'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Pediatric Dentistry</div>
+                  <div class="treatment-item-desc">Gentle care for kids</div>
+                </div>
+              </a>
+
+              <!-- 9. Wisdom Tooth Extraction -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Wisdom Tooth Removal'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Wisdom Tooth Extraction</div>
+                  <div class="treatment-item-desc">Safe surgical removal</div>
+                </div>
+              </a>
+
+              <!-- 10. Gum Disease Therapy -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Gum Treatment'})">
+                <div class="dropdown-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12A10 10 0 0 1 12 2z"/><path d="M12 6v6l4 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Gum Disease Therapy</div>
+                  <div class="treatment-item-desc">Periodontal health and care</div>
+                </div>
+              </a>
+
+              <!-- 11. Emergency Dental Care -->
+              <a href="#treatments" class="treatment-item-link" role="menuitem" tabindex="-1" onclick="openAppointmentModal({treatment: 'Emergency Dental Care'})">
+                <div class="dropdown-icon" style="background-color:rgba(239,68,68,0.15); color:#ef4444;">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </div>
+                <div class="treatment-item-text">
+                  <div class="treatment-item-title">Emergency Dental Care</div>
+                  <div class="treatment-item-desc">Same-day urgent relief</div>
+                </div>
+              </a>
+            </div>
+
+            <div class="dropdown-footer">
+              <a href="#treatments" class="dropdown-footer-link">
+                <span>View all treatments &amp; clinical procedures</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -325,7 +422,63 @@
 
     <div class="mobile-nav-links">
       <a href="#about" class="mobile-nav-link">About Us</a>
-      <a href="#treatments" class="mobile-nav-link">Treatments & Services</a>
+      
+      <!-- Mobile Treatments Accordion -->
+      <div class="mobile-accordion" id="mobile-treatments-accordion">
+        <button class="mobile-accordion-toggle" id="mobile-treatments-btn" aria-expanded="false" aria-controls="mobile-treatments-panel">
+          <span>Treatments &amp; Specialties</span>
+          <svg class="mobile-accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="mobile-accordion-panel" id="mobile-treatments-panel">
+          <div class="mobile-treatments-list">
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Teeth Cleaning & Scaling'})">
+              <span class="m-treatment-name">General Checkup &amp; Cleaning</span>
+              <span class="m-treatment-desc">Routine exams, scaling and polishing</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Dental Implants'})">
+              <span class="m-treatment-name">Dental Implants</span>
+              <span class="m-treatment-desc">Permanent tooth replacement</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Root Canal Treatment'})">
+              <span class="m-treatment-name">Root Canal Treatment (RCT)</span>
+              <span class="m-treatment-desc">Pain-free infection treatment</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Teeth Whitening'})">
+              <span class="m-treatment-name">Teeth Whitening</span>
+              <span class="m-treatment-desc">Brighter smile in one visit</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Clear Aligners'})">
+              <span class="m-treatment-name">Braces &amp; Clear Aligners</span>
+              <span class="m-treatment-desc">Straighten teeth discreetly</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Cosmetic Dentistry'})">
+              <span class="m-treatment-name">Smile Makeover &amp; Veneers</span>
+              <span class="m-treatment-desc">Cosmetic smile design</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Dental Crowns'})">
+              <span class="m-treatment-name">Crowns, Bridges &amp; Dentures</span>
+              <span class="m-treatment-desc">Restore damaged or missing teeth</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Pediatric Dentistry'})">
+              <span class="m-treatment-name">Pediatric Dentistry</span>
+              <span class="m-treatment-desc">Gentle care for kids</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Wisdom Tooth Removal'})">
+              <span class="m-treatment-name">Wisdom Tooth Extraction</span>
+              <span class="m-treatment-desc">Safe surgical removal</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item" onclick="openAppointmentModal({treatment: 'Gum Treatment'})">
+              <span class="m-treatment-name">Gum Disease Therapy</span>
+              <span class="m-treatment-desc">Periodontal health and care</span>
+            </a>
+            <a href="#treatments" class="mobile-treatment-item emergency-item" onclick="openAppointmentModal({treatment: 'Emergency Dental Care'})">
+              <span class="m-treatment-name" style="color:#ef4444;">Emergency Dental Care</span>
+              <span class="m-treatment-desc">Same-day urgent relief</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <a href="#dentists" class="mobile-nav-link">Meet Our Dentists</a>
       <a href="#why-us" class="mobile-nav-link">Why Choose Us</a>
       <a href="#transformation" class="mobile-nav-link">Smile Transformation</a>
