@@ -326,10 +326,11 @@ button, input, select, textarea {
   justify-content: space-between;
   height: 80px;
   width: 100%;
-  max-width: 1320px;
+  max-width: 1380px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   box-sizing: border-box;
+  flex-wrap: nowrap !important;
 }
 
 .site-header.scrolled .nav-container {
@@ -340,13 +341,13 @@ button, input, select, textarea {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-  white-space: nowrap;
+  gap: 10px;
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
   text-decoration: none;
   cursor: pointer;
   user-select: none;
-  height: 50px;
+  height: 48px;
   transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
@@ -356,37 +357,38 @@ button, input, select, textarea {
 }
 
 .brand-icon-box {
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, var(--primary) 0%, var(--accent-teal) 100%);
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--white);
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
   box-shadow: 0 4px 12px rgba(23, 74, 91, 0.2);
 }
 
 .brand-icon-box svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
 }
 
 .brand-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  white-space: nowrap;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .brand-name {
-  font-size: 1.55rem;
+  font-size: 1.45rem;
   font-weight: 800;
   color: var(--primary);
   line-height: 1.1;
   letter-spacing: -0.02em;
-  white-space: nowrap;
+  white-space: nowrap !important;
 }
 
 .brand-name span {
@@ -394,13 +396,13 @@ button, input, select, textarea {
 }
 
 .brand-tagline {
-  font-size: 10.5px;
+  font-size: 9px;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   margin-top: 2px;
-  white-space: nowrap;
+  white-space: nowrap !important;
   line-height: 1.2;
 }
 
@@ -408,36 +410,43 @@ button, input, select, textarea {
 .nav-menu {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: nowrap !important;
   align-items: center;
-  gap: 28px;
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
+  flex-shrink: 0 !important;
 }
 
 .nav-item {
   position: relative;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  display: inline-flex;
+  align-items: center;
 }
 
 .nav-link {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: var(--charcoal);
-  padding: 10px 4px;
+  padding: 8px 3px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   position: relative;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
   background: none;
   cursor: pointer;
   border: none;
   font-family: inherit;
   transition: color var(--transition-fast);
+}
+
+.nav-link span {
+  white-space: nowrap !important;
 }
 
 .nav-link:hover, .nav-link:focus, .nav-link.active {
@@ -629,25 +638,29 @@ button, input, select, textarea {
 .nav-action-wrapper {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex-shrink: 0;
-  flex-wrap: nowrap;
+  gap: 12px;
+  flex-shrink: 0 !important;
+  flex-wrap: nowrap !important;
 }
 
 .nav-phone-btn {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
+  gap: 8px;
+  padding: 8px 14px;
   background-color: var(--soft-aqua);
   border-radius: var(--radius-full);
   color: var(--primary);
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
   text-decoration: none;
   transition: all var(--transition-fast);
+}
+
+.nav-phone-btn span {
+  white-space: nowrap !important;
 }
 
 .nav-phone-btn:hover {
@@ -656,24 +669,32 @@ button, input, select, textarea {
 }
 
 .nav-phone-number {
-  white-space: nowrap;
+  white-space: nowrap !important;
 }
 
 .nav-phone-icon {
-  width: 30px;
-  height: 30px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background-color: var(--primary);
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  flex-shrink: 0 !important;
 }
 
 .nav-phone-icon svg {
-  width: 14px;
-  height: 14px;
+  width: 13px;
+  height: 13px;
+}
+
+.nav-action-wrapper .btn-primary {
+  padding: 9px 18px !important;
+  font-size: 0.86rem !important;
+  gap: 7px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
 }
 
 .nav-phone-icon {
@@ -2725,27 +2746,51 @@ textarea.form-control {
    - Ultra-compact Phones: < 360px
    ========================================================================== */
 
-/* 1024px to 1279px: Hide phone pill & tighten gap so nav NEVER wraps */
+/* 1024px to 1279px: Compact Navbar to ensure perfect fit without wrapping */
 @media (min-width: 1024px) and (max-width: 1279px) {
-  .nav-phone-btn {
-    display: none !important;
-  }
   .nav-menu {
-    gap: 16px !important;
+    gap: 14px !important;
   }
   .nav-link {
-    font-size: 0.88rem !important;
-    padding: 8px 3px !important;
+    font-size: 0.84rem !important;
+    padding: 6px 2px !important;
+    white-space: nowrap !important;
   }
   .brand-name {
-    font-size: 1.35rem !important;
+    font-size: 1.32rem !important;
   }
   .brand-tagline {
-    font-size: 9.5px !important;
+    font-size: 8.5px !important;
+    white-space: nowrap !important;
+  }
+  .nav-phone-btn {
+    padding: 7px 11px !important;
+    font-size: 0.78rem !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+  }
+  .nav-phone-icon {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  .nav-action-wrapper {
+    gap: 10px !important;
+  }
+  .nav-action-wrapper .btn-primary {
+    padding: 8px 14px !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
   }
   .services-grid {
     grid-template-columns: repeat(3, 1fr) !important;
     gap: 20px !important;
+  }
+}
+
+/* Under 1140px: Hide phone pill so nav items never feel cramped */
+@media (max-width: 1140px) {
+  .nav-phone-btn {
+    display: none !important;
   }
 }
 
